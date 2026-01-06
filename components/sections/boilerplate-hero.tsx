@@ -16,47 +16,86 @@ export function BoilerplateHero() {
 
   return (
     <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden pt-24 bg-gradient-to-b from-[#FFF5F8] via-background to-background dark:from-[#1C1C1E] dark:via-[#1C1C1E] dark:to-[#1C1C1E]">
-      {/* Background Glow Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-[15%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#FF4D8E]/20 dark:bg-[#FF4D8E]/15 blur-[120px]"
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute top-[30%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#00C2FF]/15 dark:bg-[#00C2FF]/10 blur-[100px]"
-          animate={{
-            scale: [1, 1.15, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-        />
-        <motion.div
-          className="absolute bottom-[20%] right-[20%] w-[300px] h-[300px] rounded-full bg-[#FF9100]/10 dark:bg-[#FF9100]/8 blur-[80px]"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.2, 0.35, 0.2],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 2,
-          }}
-        />
-      </div>
+      {/* ============ GRADIENT GLOW ORBS ============ */}
+
+      {/* Pink glow - top left area */}
+      <motion.div
+        className="absolute top-0 left-[5%] w-[600px] h-[600px] rounded-full pointer-events-none opacity-70 dark:opacity-50"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 77, 142, 0.4) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+          x: [0, 20, 0],
+          y: [0, -15, 0],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      {/* Blue glow - top right area */}
+      <motion.div
+        className="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full pointer-events-none opacity-60 dark:opacity-40"
+        style={{
+          background: 'radial-gradient(circle, rgba(0, 194, 255, 0.35) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{
+          scale: [1, 1.15, 1],
+          x: [0, -15, 0],
+          y: [0, 20, 0],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 2,
+        }}
+      />
+
+      {/* Orange glow - bottom center */}
+      <motion.div
+        className="absolute bottom-[10%] left-[30%] w-[400px] h-[400px] rounded-full pointer-events-none opacity-50 dark:opacity-35"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 145, 0, 0.3) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 25, 0],
+          y: [0, -10, 0],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 4,
+        }}
+      />
+
+      {/* Secondary pink glow - bottom right for balance */}
+      <motion.div
+        className="absolute bottom-0 right-[10%] w-[450px] h-[450px] rounded-full pointer-events-none opacity-40 dark:opacity-25"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 77, 142, 0.3) 0%, transparent 70%)',
+          filter: 'blur(100px)',
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+          x: [0, -20, 0],
+          y: [0, -25, 0],
+        }}
+        transition={{
+          duration: 22,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 6,
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-6 text-center">
