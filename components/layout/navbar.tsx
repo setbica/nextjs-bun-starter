@@ -86,16 +86,23 @@ function ThemeToggle() {
 export function Navbar() {
   const { data: session } = useSession();
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
       <nav className="glass shadow-glass rounded-full px-6 py-3 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
+        <button onClick={scrollToTop} className="flex items-center gap-2 shrink-0 cursor-pointer">
           <PhoenixLogo className="w-7 h-7" />
           <span className="text-lg font-semibold text-foreground tracking-tight">
             YUV.AI
           </span>
-        </Link>
+        </button>
 
         {/* Navigation Links - Center */}
         <div className="hidden md:flex items-center gap-8">
