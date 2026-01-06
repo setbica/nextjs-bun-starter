@@ -47,12 +47,10 @@ export function ArticleContent({ post }: ArticleContentProps) {
       const availableVoices = speechSynthesis.getVoices();
       if (availableVoices.length === 0) return;
 
-      // Filter for English voices, prioritize natural/enhanced ones
       const englishVoices = availableVoices.filter(v => v.lang.startsWith('en'));
       const voicesToUse = englishVoices.length > 0 ? englishVoices : availableVoices;
       setVoices(voicesToUse);
 
-      // Set default voice (prefer Google or Microsoft voices if available)
       if (!selectedVoice) {
         const preferredVoice = voicesToUse.find(v =>
           v.name.includes('Google') || v.name.includes('Microsoft') || v.name.includes('Natural') || v.name.includes('Samantha')
@@ -63,7 +61,6 @@ export function ArticleContent({ post }: ArticleContentProps) {
 
     loadVoices();
 
-    // Chrome loads voices asynchronously
     if (speechSynthesis.onvoiceschanged !== undefined) {
       speechSynthesis.onvoiceschanged = loadVoices;
     }
@@ -210,91 +207,105 @@ export function ArticleContent({ post }: ArticleContentProps) {
       </div>
 
       {/* Article */}
-      <main className="pt-28 pb-32 min-h-screen">
-        <article className="container mx-auto px-6 max-w-3xl">
+      <main className="pt-24 md:pt-28 pb-24 md:pb-32 min-h-screen">
+        <article className="container mx-auto px-4 md:px-6 max-w-3xl">
           {/* Back Link */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6 md:mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
           </Link>
 
           {/* Article Header */}
-          <header className="mb-12">
-            <div className="flex flex-wrap items-center gap-3 mb-6">
-              <span className="text-sm font-medium px-3 py-1 rounded-full bg-[#FF4D8E]/10 text-[#FF4D8E]">
+          <header className="mb-8 md:mb-12">
+            <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4 md:mb-6">
+              <span className="text-xs md:text-sm font-medium px-2 md:px-3 py-1 rounded-full bg-[#FF4D8E]/10 text-[#FF4D8E]">
                 {post.category}
               </span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-xs md:text-sm text-muted-foreground">
                 {post.readingTime} min read
               </span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-xs md:text-sm text-muted-foreground">
                 {post.date}
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 md:mb-6 leading-tight">
               {post.title}
             </h1>
 
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-base md:text-xl text-muted-foreground mb-6 md:mb-8 leading-relaxed">
               {post.excerpt}
             </p>
 
-            <div className="flex items-center justify-between pb-8 border-b border-border">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#FF4D8E] to-[#8B5CF6] flex items-center justify-center text-white font-semibold overflow-hidden">
+            {/* Author + Listen Button - stack on small mobile */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 md:pb-8 border-b border-border">
+              <div className="flex items-center gap-3 md:gap-4">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br from-[#FF4D8E] to-[#8B5CF6] flex items-center justify-center text-white font-semibold text-sm md:text-base overflow-hidden">
                   <span>YA</span>
                 </div>
                 <div>
-                  <p className="font-medium text-foreground">{post.author.name}</p>
-                  <p className="text-sm text-muted-foreground">Author</p>
+                  <p className="font-medium text-foreground text-sm md:text-base">{post.author.name}</p>
+                  <p className="text-xs md:text-sm text-muted-foreground">Author</p>
                 </div>
               </div>
 
-              {/* Listen Button */}
+              {/* Listen Button - full width on mobile */}
               {ttsSupported && !showPlayer && (
                 <button
                   onClick={handlePlay}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FF4D8E] text-white hover:bg-[#FF4D8E]/90 transition-colors shadow-lg shadow-[#FF4D8E]/25"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 md:px-5 py-2.5 rounded-full bg-[#FF4D8E] text-white hover:bg-[#FF4D8E]/90 transition-colors shadow-lg shadow-[#FF4D8E]/25"
                 >
                   <Volume2 className="w-4 h-4" />
-                  <span className="text-sm font-medium">Listen to article</span>
+                  <span className="text-sm font-medium">Listen</span>
                 </button>
               )}
             </div>
           </header>
 
-          {/* Article Body - PROPER SPACING */}
+          {/* Article Body - Mobile typography */}
           <div
             ref={articleRef}
             className="
               prose
-              prose-lg
+              prose-sm
+              md:prose-lg
               dark:prose-invert
               max-w-none
 
               prose-headings:font-semibold
               prose-headings:text-foreground
 
-              prose-h2:text-2xl
-              prose-h2:mt-14
-              prose-h2:mb-6
+              prose-h2:text-xl
+              md:prose-h2:text-2xl
+              prose-h2:mt-10
+              md:prose-h2:mt-14
+              prose-h2:mb-4
+              md:prose-h2:mb-6
 
-              prose-h3:text-xl
-              prose-h3:mt-10
-              prose-h3:mb-4
+              prose-h3:text-lg
+              md:prose-h3:text-xl
+              prose-h3:mt-8
+              md:prose-h3:mt-10
+              prose-h3:mb-3
+              md:prose-h3:mb-4
 
+              prose-p:text-sm
+              md:prose-p:text-base
               prose-p:text-foreground/80
-              prose-p:leading-[1.8]
-              prose-p:mb-6
+              prose-p:leading-relaxed
+              md:prose-p:leading-[1.8]
+              prose-p:mb-4
+              md:prose-p:mb-6
 
-              [&>p:first-of-type]:text-xl
+              [&>p:first-of-type]:text-base
+              md:[&>p:first-of-type]:text-xl
               [&>p:first-of-type]:text-foreground/70
               [&>p:first-of-type]:leading-relaxed
-              [&>p:first-of-type]:mb-8
+              [&>p:first-of-type]:mb-6
+              md:[&>p:first-of-type]:mb-8
 
               prose-a:text-[#FF4D8E]
               prose-a:no-underline
@@ -305,44 +316,61 @@ export function ArticleContent({ post }: ArticleContentProps) {
 
               prose-code:text-[#FF4D8E]
               prose-code:bg-[#FF4D8E]/10
-              prose-code:px-1.5
+              prose-code:px-1
+              md:prose-code:px-1.5
               prose-code:py-0.5
               prose-code:rounded
               prose-code:font-normal
+              prose-code:text-xs
+              md:prose-code:text-sm
               prose-code:before:content-none
               prose-code:after:content-none
 
               prose-pre:bg-[#1C1C1E]
               prose-pre:border
               prose-pre:border-white/10
-              prose-pre:rounded-xl
-              prose-pre:my-8
+              prose-pre:rounded-lg
+              md:prose-pre:rounded-xl
+              prose-pre:my-6
+              md:prose-pre:my-8
+              prose-pre:text-xs
+              md:prose-pre:text-sm
 
               prose-blockquote:border-l-[#FF4D8E]
               prose-blockquote:border-l-4
               prose-blockquote:bg-[#FF4D8E]/5
-              prose-blockquote:py-4
-              prose-blockquote:px-6
-              prose-blockquote:rounded-r-xl
+              prose-blockquote:py-3
+              md:prose-blockquote:py-4
+              prose-blockquote:px-4
+              md:prose-blockquote:px-6
+              prose-blockquote:rounded-r-lg
+              md:prose-blockquote:rounded-r-xl
               prose-blockquote:not-italic
-              prose-blockquote:my-8
+              prose-blockquote:my-6
+              md:prose-blockquote:my-8
               prose-blockquote:text-foreground/80
 
-              prose-ul:my-6
-              prose-ul:space-y-3
-              prose-ol:my-6
-              prose-ol:space-y-3
+              prose-ul:my-4
+              md:prose-ul:my-6
+              prose-ul:space-y-2
+              md:prose-ul:space-y-3
+              prose-ol:my-4
+              md:prose-ol:my-6
+              prose-ol:space-y-2
+              md:prose-ol:space-y-3
               prose-li:text-foreground/80
               prose-li:leading-relaxed
+              prose-li:text-sm
+              md:prose-li:text-base
             "
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}
           />
 
           {/* Article Footer */}
-          <footer className="mt-16 pt-8 border-t border-border">
+          <footer className="mt-12 md:mt-16 pt-6 md:pt-8 border-t border-border">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-[#FF4D8E] hover:underline font-medium"
+              className="inline-flex items-center gap-2 text-sm md:text-base text-[#FF4D8E] hover:underline font-medium"
             >
               <ArrowLeft className="w-4 h-4" />
               More articles
@@ -370,50 +398,53 @@ export function ArticleContent({ post }: ArticleContentProps) {
             border-t
             border-gray-200
             dark:border-white/10
-            px-4
+            px-3
             md:px-6
             py-3
             md:py-4
+            safe-area-inset-bottom
           ">
-            <div className="container mx-auto max-w-4xl flex items-center justify-between gap-4">
-              {/* Left: Track Info */}
-              <div className="flex items-center gap-3 flex-1 min-w-0">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-gradient-to-br from-[#FF4D8E] to-[#8B5CF6] flex items-center justify-center flex-shrink-0">
-                  <Volume2 className="w-5 h-5 md:w-6 md:h-6 text-white" />
+            <div className="flex items-center justify-between gap-2 md:gap-4 max-w-4xl mx-auto">
+              {/* Left: Track Info - hide text on very small screens */}
+              <div className="flex items-center gap-2 md:gap-3 flex-1 min-w-0">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#FF4D8E] to-[#8B5CF6] flex items-center justify-center flex-shrink-0">
+                  <Volume2 className="w-5 h-5 text-white" />
                 </div>
                 <div className="min-w-0 hidden sm:block">
-                  <p className="font-medium text-foreground text-sm truncate">{post.title}</p>
-                  <p className="text-xs text-muted-foreground truncate">{post.author.name} • {speed}x speed</p>
+                  <p className="font-medium text-foreground text-xs md:text-sm truncate max-w-[120px] md:max-w-none">
+                    {post.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{speed}x</p>
                 </div>
               </div>
 
               {/* Center: Playback Controls */}
-              <div className="flex items-center gap-2 md:gap-4">
+              <div className="flex items-center gap-1 md:gap-4">
                 <button
                   onClick={handleRestart}
-                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-1.5 md:p-2 text-muted-foreground hover:text-foreground transition-colors"
                   title="Restart"
                 >
-                  <SkipBack className="w-5 h-5" />
+                  <SkipBack className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
 
                 <button
                   onClick={isPlaying ? handlePause : handlePlay}
-                  className="w-12 h-12 rounded-full bg-[#FF4D8E] text-white flex items-center justify-center hover:bg-[#FF4D8E]/90 transition-colors shadow-lg"
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#FF4D8E] text-white flex items-center justify-center hover:bg-[#FF4D8E]/90 transition-colors shadow-lg"
                 >
                   {isPlaying ? (
-                    <Pause className="w-5 h-5" />
+                    <Pause className="w-4 h-4 md:w-5 md:h-5" />
                   ) : (
-                    <Play className="w-5 h-5 ml-0.5" />
+                    <Play className="w-4 h-4 md:w-5 md:h-5 ml-0.5" />
                   )}
                 </button>
 
                 <button
                   onClick={handleStop}
-                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-1.5 md:p-2 text-muted-foreground hover:text-foreground transition-colors"
                   title="Stop"
                 >
-                  <Square className="w-4 h-4" />
+                  <Square className="w-3 h-3 md:w-4 md:h-4" />
                 </button>
               </div>
 
@@ -423,17 +454,17 @@ export function ArticleContent({ post }: ArticleContentProps) {
                 <div className="relative">
                   <button
                     onClick={() => setShowSettings(!showSettings)}
-                    className={`p-2 rounded-full transition-colors ${showSettings ? 'bg-[#FF4D8E]/10 text-[#FF4D8E]' : 'text-muted-foreground hover:text-foreground'}`}
+                    className={`p-1.5 md:p-2 rounded-full transition-colors ${showSettings ? 'bg-[#FF4D8E]/10 text-[#FF4D8E]' : 'text-muted-foreground hover:text-foreground'}`}
                     title="Settings"
                   >
-                    <Settings className="w-5 h-5" />
+                    <Settings className="w-4 h-4 md:w-5 md:h-5" />
                   </button>
 
-                  {/* Settings Dropdown */}
+                  {/* Settings Dropdown - position above on mobile */}
                   {showSettings && (
-                    <div className="absolute bottom-full right-0 mb-3 w-72 p-4 rounded-2xl bg-white dark:bg-[#1C1C1E] border border-gray-200 dark:border-white/10 shadow-2xl">
-                      <div className="flex items-center justify-between mb-4">
-                        <h4 className="font-semibold text-foreground">Playback Settings</h4>
+                    <div className="absolute bottom-full right-0 mb-3 w-64 md:w-72 p-3 md:p-4 rounded-xl md:rounded-2xl bg-white dark:bg-[#1C1C1E] border border-gray-200 dark:border-white/10 shadow-2xl">
+                      <div className="flex items-center justify-between mb-3 md:mb-4">
+                        <h4 className="font-semibold text-foreground text-sm md:text-base">Playback Settings</h4>
                         <button
                           onClick={() => setShowSettings(false)}
                           className="p-1 hover:bg-gray-100 dark:hover:bg-white/10 rounded-full"
@@ -443,8 +474,8 @@ export function ArticleContent({ post }: ArticleContentProps) {
                       </div>
 
                       {/* Speed Control */}
-                      <div className="mb-5">
-                        <label className="text-sm font-medium text-foreground mb-3 flex items-center justify-between">
+                      <div className="mb-4 md:mb-5">
+                        <label className="text-xs md:text-sm font-medium text-foreground mb-2 md:mb-3 flex items-center justify-between">
                           <span>Speed</span>
                           <span className="text-[#FF4D8E]">{speed}x</span>
                         </label>
@@ -460,7 +491,7 @@ export function ArticleContent({ post }: ArticleContentProps) {
                           }}
                           className="w-full h-2 bg-gray-200 dark:bg-white/10 rounded-full appearance-none cursor-pointer accent-[#FF4D8E]"
                         />
-                        <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                        <div className="flex justify-between text-xs text-muted-foreground mt-1 md:mt-2">
                           <span>0.5x</span>
                           <span>1x</span>
                           <span>1.5x</span>
@@ -471,7 +502,7 @@ export function ArticleContent({ post }: ArticleContentProps) {
                       {/* Voice Selection */}
                       {voices.length > 0 && (
                         <div>
-                          <label className="text-sm font-medium text-foreground mb-2 block">
+                          <label className="text-xs md:text-sm font-medium text-foreground mb-2 block">
                             Voice
                           </label>
                           <select
@@ -480,7 +511,7 @@ export function ArticleContent({ post }: ArticleContentProps) {
                               const voice = voices.find(v => v.name === e.target.value);
                               setSelectedVoice(voice || null);
                             }}
-                            className="w-full p-2.5 rounded-xl bg-gray-100 dark:bg-white/10 border-0 text-foreground text-sm focus:ring-2 focus:ring-[#FF4D8E] cursor-pointer"
+                            className="w-full p-2 md:p-2.5 rounded-lg md:rounded-xl bg-gray-100 dark:bg-white/10 border-0 text-foreground text-xs md:text-sm focus:ring-2 focus:ring-[#FF4D8E] cursor-pointer"
                           >
                             {voices.map((voice) => (
                               <option key={voice.name} value={voice.name}>
@@ -491,8 +522,8 @@ export function ArticleContent({ post }: ArticleContentProps) {
                         </div>
                       )}
 
-                      <p className="text-xs text-muted-foreground mt-4">
-                        Changes apply when you restart playback
+                      <p className="text-xs text-muted-foreground mt-3 md:mt-4">
+                        Changes apply when you restart
                       </p>
                     </div>
                   )}
@@ -501,10 +532,10 @@ export function ArticleContent({ post }: ArticleContentProps) {
                 {/* Close Button */}
                 <button
                   onClick={handleStop}
-                  className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-1.5 md:p-2 text-muted-foreground hover:text-foreground transition-colors"
                   title="Close player"
                 >
-                  <VolumeX className="w-5 h-5" />
+                  <X className="w-4 h-4 md:w-5 md:h-5" />
                 </button>
               </div>
             </div>
