@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { GlassCard } from '@/components/ui/glass-card';
 import { ArrowRight, Sparkles, Code2, Cpu } from 'lucide-react';
 import Link from 'next/link';
 
@@ -50,10 +49,7 @@ const itemVariants = {
 
 export function InsightsSection() {
   return (
-    <section id="insights" className="py-24 px-6 relative">
-      {/* Subtle background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#FF4D8E]/5 to-transparent pointer-events-none" />
-
+    <section id="insights" className="py-24 px-6 relative bg-[#F2F2F7]">
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Header */}
         <motion.div
@@ -63,10 +59,10 @@ export function InsightsSection() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#1C1C1E] mb-3">
             YUV.AI Insights
           </h2>
-          <p className="text-white/60 text-lg max-w-xl">
+          <p className="text-[#1C1C1E]/60 text-lg max-w-xl">
             Thoughts and perspectives on AI, development, and building the future
           </p>
         </motion.div>
@@ -84,21 +80,17 @@ export function InsightsSection() {
             return (
               <motion.div key={index} variants={itemVariants}>
                 <Link href={insight.href}>
-                  <GlassCard
-                    variant="dark"
-                    hover
-                    className="p-6 h-full group"
-                  >
+                  <div className="glass-light shadow-glass rounded-[16px] p-6 h-full group hover-lift">
                     {/* Icon */}
                     <div className="w-12 h-12 rounded-xl bg-[#FF4D8E]/10 flex items-center justify-center mb-5 group-hover:bg-[#FF4D8E]/20 transition-colors">
                       <IconComponent className="w-6 h-6 text-[#FF4D8E]" />
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-lg font-semibold text-white mb-3 group-hover:text-[#FF4D8E] transition-colors">
+                    <h3 className="text-lg font-semibold text-[#1C1C1E] mb-3 group-hover:text-[#FF4D8E] transition-colors">
                       {insight.title}
                     </h3>
-                    <p className="text-sm text-white/50 mb-5 line-clamp-3">
+                    <p className="text-sm text-[#1C1C1E]/60 mb-5 line-clamp-3">
                       {insight.excerpt}
                     </p>
 
@@ -107,7 +99,7 @@ export function InsightsSection() {
                       Learn More
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </div>
-                  </GlassCard>
+                  </div>
                 </Link>
               </motion.div>
             );

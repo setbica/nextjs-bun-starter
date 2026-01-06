@@ -62,7 +62,7 @@ function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <button className="w-9 h-9 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center">
+      <button className="w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center">
         <Sun className="w-4 h-4 text-foreground/60" />
       </button>
     );
@@ -71,13 +71,13 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="w-9 h-9 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 flex items-center justify-center transition-colors"
+      className="w-9 h-9 rounded-full bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 flex items-center justify-center transition-colors"
       aria-label="Toggle theme"
     >
       {theme === 'dark' ? (
-        <Sun className="w-4 h-4 text-foreground/60 hover:text-foreground transition-colors" />
+        <Sun className="w-4 h-4 text-foreground/70 hover:text-foreground transition-colors" />
       ) : (
-        <Moon className="w-4 h-4 text-foreground/60 hover:text-foreground transition-colors" />
+        <Moon className="w-4 h-4 text-foreground/70 hover:text-foreground transition-colors" />
       )}
     </button>
   );
@@ -87,18 +87,18 @@ export function Navbar() {
   const { data: session } = useSession();
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
-      <nav className="glass-panel dark:glass-panel-dark rounded-full px-6 py-3 flex items-center gap-8 max-w-[900px] w-full">
+    <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-4xl px-4">
+      <nav className="glass shadow-glass rounded-full px-6 py-3 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <PhoenixLogo className="w-8 h-8" />
+          <PhoenixLogo className="w-7 h-7" />
           <span className="text-lg font-semibold text-foreground tracking-tight">
             YUV.AI
           </span>
         </Link>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-8 flex-1 justify-center">
+        {/* Navigation Links - Center */}
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -117,7 +117,7 @@ export function Navbar() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="relative rounded-full ring-2 ring-transparent hover:ring-[#FF4D8E]/50 transition-all duration-200">
-                  <Avatar className="w-9 h-9 border-2 border-white/20">
+                  <Avatar className="w-9 h-9 border-2 border-[#FF4D8E]/30">
                     <AvatarImage src={session.user.image || undefined} alt={session.user.name || 'User'} />
                     <AvatarFallback className="bg-gradient-to-br from-[#FF4D8E] to-[#FF9100] text-white text-sm font-medium">
                       {session.user.name?.[0]?.toUpperCase() || 'U'}
@@ -152,13 +152,11 @@ export function Navbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button
-              onClick={() => signIn('google')}
-              className="bg-[#FF4D8E] hover:bg-[#FF4D8E]/90 text-white rounded-full px-5 py-2 text-sm font-medium transition-all duration-200 hover:scale-[1.02]"
-              size="sm"
-            >
-              Contact
-            </Button>
+            <Avatar className="w-9 h-9 border-2 border-[#FF4D8E]/30 cursor-pointer hover:border-[#FF4D8E]/60 transition-colors" onClick={() => signIn('google')}>
+              <AvatarFallback className="bg-gradient-to-br from-[#FF4D8E] to-[#FF9100] text-white text-sm font-medium">
+                YA
+              </AvatarFallback>
+            </Avatar>
           )}
         </div>
       </nav>

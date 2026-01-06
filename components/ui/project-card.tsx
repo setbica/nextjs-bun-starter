@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { GlassCard } from './glass-card';
 import Image from 'next/image';
 import { Brain, Code2, Database, Mic, TestTube, BarChart3, LucideIcon } from 'lucide-react';
 
@@ -16,13 +15,13 @@ interface ProjectCardProps {
   gradient?: 'pink' | 'blue' | 'orange' | 'purple' | 'teal' | 'brand';
 }
 
-const gradients = {
-  pink: 'from-[#FF4D8E]/80 via-[#FF4D8E]/60 to-[#FF4D8E]/40',
-  blue: 'from-[#00C2FF]/80 via-[#00C2FF]/60 to-[#00C2FF]/40',
-  orange: 'from-[#FF9100]/80 via-[#FF9100]/60 to-[#FF9100]/40',
-  purple: 'from-purple-500/80 via-purple-500/60 to-purple-500/40',
-  teal: 'from-teal-500/80 via-teal-500/60 to-teal-500/40',
-  brand: 'from-[#FF4D8E]/80 via-[#00C2FF]/60 to-[#FF9100]/40',
+const gradientStyles = {
+  pink: 'from-[#FF4D8E] to-[#8B5CF6]',
+  blue: 'from-[#3B82F6] to-[#00C2FF]',
+  orange: 'from-[#FF9100] to-[#FF4D8E]',
+  purple: 'from-[#8B5CF6] to-[#00C2FF]',
+  teal: 'from-[#14B8A6] to-[#06B6D4]',
+  brand: 'from-[#FF4D8E] via-[#8B5CF6] to-[#00C2FF]',
 };
 
 export function ProjectCard({
@@ -38,10 +37,11 @@ export function ProjectCard({
   const CardWrapper = href ? 'a' : 'div';
 
   return (
-    <GlassCard
-      variant="dark"
-      hover
-      className={cn('overflow-hidden group', className)}
+    <div
+      className={cn(
+        'glass-dark shadow-glass rounded-[16px] overflow-hidden group hover:scale-[1.02] transition-transform duration-300',
+        className
+      )}
     >
       <CardWrapper
         href={href}
@@ -49,7 +49,7 @@ export function ProjectCard({
         rel={href ? 'noopener noreferrer' : undefined}
         className="block"
       >
-        {/* Thumbnail Area */}
+        {/* Gradient Thumbnail Area */}
         <div className="relative aspect-[16/10] overflow-hidden">
           {thumbnail ? (
             <Image
@@ -61,28 +61,28 @@ export function ProjectCard({
           ) : (
             <div className={cn(
               'w-full h-full bg-gradient-to-br flex items-center justify-center relative',
-              gradients[gradient]
+              gradientStyles[gradient]
             )}>
-              {/* Abstract pattern overlay */}
-              <div className="absolute inset-0 opacity-30">
+              {/* Dot pattern overlay */}
+              <div className="absolute inset-0 opacity-20">
                 <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                   <defs>
-                    <pattern id={`grid-${title}`} width="10" height="10" patternUnits="userSpaceOnUse">
+                    <pattern id={`dots-${title.replace(/\s+/g, '-')}`} width="8" height="8" patternUnits="userSpaceOnUse">
                       <circle cx="1" cy="1" r="0.5" fill="white" />
                     </pattern>
                   </defs>
-                  <rect width="100" height="100" fill={`url(#grid-${title})`} />
+                  <rect width="100" height="100" fill={`url(#dots-${title.replace(/\s+/g, '-')})`} />
                 </svg>
               </div>
 
-              {/* Center Icon or Logo */}
+              {/* Center Icon */}
               {Icon ? (
-                <Icon className="w-16 h-16 text-white/80 transition-transform duration-300 group-hover:scale-110" />
+                <Icon className="w-14 h-14 text-white/90 transition-transform duration-300 group-hover:scale-110 relative z-10" />
               ) : (
                 <div className="relative">
                   <svg
                     viewBox="0 0 100 100"
-                    className="w-20 h-20"
+                    className="w-16 h-16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -114,7 +114,7 @@ export function ProjectCard({
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#FF4D8E]/20 text-[#FF4D8E] border border-[#FF4D8E]/30"
+                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#FF4D8E] text-white"
               >
                 {tag}
               </span>
@@ -122,7 +122,7 @@ export function ProjectCard({
           </div>
         </div>
       </CardWrapper>
-    </GlassCard>
+    </div>
   );
 }
 

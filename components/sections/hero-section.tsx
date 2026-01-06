@@ -14,15 +14,15 @@ const socialLinks = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden pt-24 bg-gradient-to-b from-[#FFF5F8] via-background to-background dark:from-[#1C1C1E] dark:via-[#1C1C1E] dark:to-[#1C1C1E]">
       {/* Background Glow Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Primary pink glow */}
         <motion.div
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-[#FF4D8E]/20 blur-[120px]"
+          className="absolute top-[15%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#FF4D8E]/20 dark:bg-[#FF4D8E]/15 blur-[120px]"
           animate={{
             scale: [1, 1.1, 1],
-            opacity: [0.3, 0.5, 0.3],
+            opacity: [0.4, 0.6, 0.4],
           }}
           transition={{
             duration: 8,
@@ -32,10 +32,10 @@ export function HeroSection() {
         />
         {/* Secondary blue glow */}
         <motion.div
-          className="absolute top-1/3 right-1/4 w-[500px] h-[500px] rounded-full bg-[#00C2FF]/15 blur-[100px]"
+          className="absolute top-[30%] right-[25%] w-[400px] h-[400px] rounded-full bg-[#00C2FF]/15 dark:bg-[#00C2FF]/10 blur-[100px]"
           animate={{
             scale: [1, 1.15, 1],
-            opacity: [0.2, 0.4, 0.2],
+            opacity: [0.3, 0.5, 0.3],
           }}
           transition={{
             duration: 10,
@@ -46,10 +46,10 @@ export function HeroSection() {
         />
         {/* Orange accent glow */}
         <motion.div
-          className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] rounded-full bg-[#FF9100]/10 blur-[80px]"
+          className="absolute bottom-[20%] right-[20%] w-[300px] h-[300px] rounded-full bg-[#FF9100]/10 dark:bg-[#FF9100]/8 blur-[80px]"
           animate={{
             scale: [1, 1.2, 1],
-            opacity: [0.15, 0.3, 0.15],
+            opacity: [0.2, 0.35, 0.2],
           }}
           transition={{
             duration: 12,
@@ -75,7 +75,7 @@ export function HeroSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-dark text-sm font-medium text-white/80 mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel-dark text-sm font-medium text-white/90 mb-6"
             >
               <span className="w-2 h-2 rounded-full bg-[#FF4D8E] animate-pulse" />
               AI Builder & Speaker
@@ -86,7 +86,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-6"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-[1.1] tracking-tight mb-6"
             >
               Innovating AI
               <br />
@@ -98,7 +98,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-lg md:text-xl text-white/60 max-w-xl leading-relaxed mb-8"
+              className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed mb-8"
             >
               Building next-generation AI solutions and empowering developers to create transformative experiences
             </motion.p>
@@ -142,7 +142,7 @@ export function HeroSection() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-[#FF4D8E] hover:bg-white/10 transition-all"
+                    className="w-10 h-10 rounded-full bg-foreground/5 dark:bg-white/5 flex items-center justify-center text-foreground/60 dark:text-white/60 hover:text-[#FF4D8E] hover:bg-foreground/10 dark:hover:bg-white/10 transition-all"
                     aria-label={social.label}
                   >
                     <IconComponent className="w-5 h-5" />
@@ -164,7 +164,7 @@ export function HeroSection() {
               <div className="absolute -inset-4 bg-gradient-to-br from-[#FF4D8E]/30 via-[#00C2FF]/20 to-[#FF9100]/30 rounded-full blur-2xl animate-pulse-glow" />
 
               {/* Profile Image */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
+              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20 dark:border-white/10 shadow-2xl">
                 <Image
                   src="https://media.licdn.com/dms/image/v2/D4D03AQFAuznqcEJXTA/profile-displayphoto-shrink_800_800/B4DZq1DCZpIMAY-/0/1763974088560?e=1769040000&v=beta&t=dRh477jKl4BQ0KqsJUg9X7UkuDDzoWgC68aHLnHDXMk"
                   alt="Yuval Avidani"
@@ -203,12 +203,12 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2"
+            className="w-6 h-10 rounded-full border-2 border-foreground/20 dark:border-white/20 flex justify-center pt-2"
           >
             <motion.div
               animate={{ opacity: [0.5, 1, 0.5], height: ['6px', '12px', '6px'] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-1 bg-white/60 rounded-full"
+              className="w-1 bg-foreground/60 dark:bg-white/60 rounded-full"
             />
           </motion.div>
         </motion.div>

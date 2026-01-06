@@ -17,7 +17,7 @@ export function GlassCard({
     <div
       className={cn(
         'rounded-[16px]',
-        variant === 'light' ? 'glass-panel' : 'glass-panel-dark',
+        variant === 'light' ? 'glass-light shadow-glass' : 'glass-dark shadow-glass',
         hover && 'hover-lift cursor-pointer',
         className
       )}

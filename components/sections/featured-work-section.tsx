@@ -74,7 +74,7 @@ const itemVariants = {
 
 export function FeaturedWorkSection() {
   return (
-    <section id="projects" className="py-24 px-6">
+    <section id="projects" className="py-24 px-6 bg-background dark:bg-[#1C1C1E]">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -85,10 +85,10 @@ export function FeaturedWorkSection() {
           className="flex items-end justify-between mb-12"
         >
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
               Featured Work
             </h2>
-            <p className="text-white/60 text-lg max-w-xl">
+            <p className="text-muted-foreground text-lg max-w-xl">
               A selection of projects showcasing AI innovation and technical excellence
             </p>
           </div>

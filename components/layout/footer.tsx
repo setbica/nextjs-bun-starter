@@ -49,7 +49,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="py-12 px-6 border-t border-white/10">
+    <footer id="contact" className="py-12 px-6 bg-[#1C1C1E]">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col items-center gap-8">
           {/* Logo and Tagline */}
@@ -94,7 +94,7 @@ export function Footer() {
           </div>
 
           {/* Copyright */}
-          <div className="pt-4 border-t border-white/5 w-full text-center">
+          <div className="pt-4 border-t border-white/10 w-full text-center">
             <p className="text-sm text-white/40">
               &copy; {currentYear} YUV.AI. All rights reserved.
             </p>

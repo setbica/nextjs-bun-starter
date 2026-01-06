@@ -17,7 +17,7 @@ const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonPrimaryProps>(
     const variants = {
       solid: 'bg-[#FF4D8E] text-white hover:bg-[#FF4D8E]/90 hover:scale-[1.02] active:scale-[0.98]',
       gradient: 'gradient-brand text-white hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]',
-      outline: 'border-2 border-[#FF4D8E] text-[#FF4D8E] hover:bg-[#FF4D8E]/10 hover:scale-[1.02] active:scale-[0.98]',
+      outline: 'border-2 border-foreground/20 text-foreground hover:bg-foreground/5 dark:border-white/20 dark:text-white dark:hover:bg-white/5 hover:scale-[1.02] active:scale-[0.98]',
     };
 
     const sizes = {
