@@ -8,9 +8,14 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?style=for-the-badge&logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+[![npm version](https://img.shields.io/npm/v/create-yuv-app?style=for-the-badge&logo=npm&label=create-yuv-app)](https://www.npmjs.com/package/create-yuv-app)
+[![npm downloads](https://img.shields.io/npm/dm/create-yuv-app?style=for-the-badge&logo=npm)](https://www.npmjs.com/package/create-yuv-app)
+
 **The ultimate production-ready Next.js starter kit with Bun, Shadcn/ui, Tailwind CSS, and Google Authentication.**
 
-[Demo](https://nextjs-bun-starter.vercel.app) • [Documentation](#documentation) • [Report Bug](https://github.com/hoodini/nextjs-bun-starter/issues)
+**Install in seconds:** `bun create yuv-app my-project`
+
+[Demo](https://nextjs-bun-starter.vercel.app) • [npm Package](https://www.npmjs.com/package/create-yuv-app) • [Report Bug](https://github.com/hoodini/nextjs-bun-starter/issues)
 
 </div>
 
@@ -161,23 +166,41 @@ The following Shadcn/ui components are already installed and ready to use:
 
 ### ⚡ One-Line Installation (Recommended)
 
+The fastest way to get started - everything is automatically set up for you:
+
 ```bash
 bun create yuv-app my-project
 ```
 
-That's it! Everything is automatically set up for you. 🎉
-
-**Alternative package managers:**
+**Works with all package managers:**
 
 ```bash
+# With Bun (Recommended - 30x faster)
+bun create yuv-app my-project
+
 # With npm
 npm create yuv-app my-project
 
 # With pnpm
 pnpm create yuv-app my-project
+
+# With Yarn
+yarn create yuv-app my-project
 ```
 
-### Manual Installation
+> **Note:** This uses the [`create-yuv-app`](https://www.npmjs.com/package/create-yuv-app) package from npm.
+
+Then just:
+```bash
+cd my-project
+bun run dev
+```
+
+🎉 **That's it!** Your app is ready at [http://localhost:3000](http://localhost:3000)
+
+---
+
+### 📝 Manual Installation
 
 If you prefer to clone manually:
 
