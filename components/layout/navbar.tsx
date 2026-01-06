@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -21,36 +22,6 @@ const navLinks = [
   { href: '/blog', label: 'Blog' },
   { href: '/#contact', label: 'Contact' },
 ];
-
-function PhoenixLogo({ className = "w-8 h-8" }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className={className}
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <defs>
-        <linearGradient id="phoenixGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#FF4D8E" />
-          <stop offset="50%" stopColor="#FF4D8E" />
-          <stop offset="100%" stopColor="#FF9100" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M50 10C35 10 25 25 25 40C25 50 30 58 38 63C30 68 25 78 25 88C35 85 45 78 50 68C55 78 65 85 75 88C75 78 70 68 62 63C70 58 75 50 75 40C75 25 65 10 50 10Z"
-        fill="url(#phoenixGradient)"
-      />
-      <path
-        d="M50 20C42 20 36 28 36 38C36 45 40 51 46 55C50 58 50 68 50 68C50 68 50 58 54 55C60 51 64 45 64 38C64 28 58 20 50 20Z"
-        fill="white"
-        fillOpacity="0.3"
-      />
-      <circle cx="44" cy="35" r="3" fill="white" />
-      <circle cx="56" cy="35" r="3" fill="white" />
-    </svg>
-  );
-}
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -115,7 +86,13 @@ export function Navbar() {
       >
         {/* Logo */}
         <button onClick={handleLogoClick} className="flex items-center gap-2 shrink-0 cursor-pointer">
-          <PhoenixLogo className="w-7 h-7" />
+          <Image
+            src="/round-avatar.svg"
+            alt="YUV.AI Logo"
+            width={28}
+            height={28}
+            className="rounded-full"
+          />
           <span className="text-lg font-semibold text-foreground tracking-tight">
             YUV.AI
           </span>

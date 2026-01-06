@@ -18,6 +18,12 @@ export const metadata: Metadata = {
   description: "Innovating AI & Development. Building next-generation AI solutions and empowering developers to create transformative experiences. AWS AI Superstar, GitHub Star, Founder of YUV.AI Community.",
   keywords: ["Yuval Avidani", "YUV.AI", "AI Builder", "AI Speaker", "Machine Learning", "Developer", "AWS AI Superstar", "GitHub Star"],
   authors: [{ name: "Yuval Avidani", url: "https://yuv.ai" }],
+  icons: {
+    icon: [
+      { url: "/round-avatar.svg", type: "image/svg+xml" },
+    ],
+    apple: "/round-avatar.svg",
+  },
   openGraph: {
     title: "YUV.AI | Yuval Avidani - AI Builder & Speaker",
     description: "Innovating AI & Development. Building next-generation AI solutions and empowering developers to create transformative experiences.",
